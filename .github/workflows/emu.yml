@@ -1,42 +1,9 @@
-# This file describes the GitHub Actions workflow for continuous integration of XS Core.
-name: EMU Test
-
-on:
-  push:
-    branches: [ master ]
-
+name: CI
+on: [push]
 jobs:
-  generate-verilog:
+  build:
     runs-on: macos-11
-    continue-on-error: false
-    name: Generate Verilog
     steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: 'recursive'
-      - uses: jodersky/setup-mill@master
-        with:
-          mill-version: 0.9.8
-          
-      - uses: joschi/setup-jdk@v2
-        with:
-          java-version: '11' # The OpenJDK version to make available on the path
-          architecture: 'x64' # defaults to 'x64'
-
-      - name: set env
-        run: |
-          echo "NEMU_HOME=/home/ci-runner/xsenv/NEMU" >> $GITHUB_ENV
-      - name: Check Wiring
-        run:
-          bash .github/workflows/check-usage.sh "BoringUtils" $GITHUB_WORKSPACE
-      - name: generate verilog file
-        run:
-          python3 $GITHUB_WORKSPACE/scripts/xiangshan.py --generate
-      - name: build MinimalConfig emu
-        run: |
-          python3 $GITHUB_WORKSPACE/scripts/xiangshan.py --build \
-            --disable-log --threads 4 --config MinimalConfig
-      - name: run MinimalConfig - Linux
-        run: |
-          python3 $GITHUB_WORKSPACE/scripts/xiangshan.py --threads 4 --numa --ci linux-hello 2> perf.log
-          cat perf.log | sort
+    - uses: actions/checkout@v2
+    - name: Setup upterm session
+      uses: lhotari/action-upterm@v1
