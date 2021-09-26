@@ -17,6 +17,11 @@ jobs:
       - uses: jodersky/setup-mill@master
         with:
           mill-version: 0.9.8
+          
+      - uses: joschi/setup-jdk@v2
+        with:
+          java-version: '11' # The OpenJDK version to make available on the path
+          architecture: 'x64' # defaults to 'x64'
 
       - name: set env
         run: |
