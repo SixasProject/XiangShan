@@ -13,4 +13,4 @@ jobs:
     steps:
       - name: test
         run: |
-          system_profiler
+          sysctl hw.memsize
