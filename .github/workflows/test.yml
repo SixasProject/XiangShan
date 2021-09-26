@@ -1,0 +1,16 @@
+# This file describes the GitHub Actions workflow for continuous integration of XS Core.
+name: EMU Test
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  generate-verilog:
+    runs-on: macos-11
+    continue-on-error: false
+    name: Generate Verilog
+    steps:
+      - name: test
+        run: |
+          uname -a
