@@ -7,7 +7,7 @@ on:
 
 jobs:
   generate-verilog:
-    runs-on: ubuntu-latest
+    runs-on: macos-11
     continue-on-error: false
     name: Generate Verilog
     steps:
