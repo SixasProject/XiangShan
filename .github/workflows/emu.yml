@@ -31,7 +31,7 @@ jobs:
           bash .github/workflows/check-usage.sh "BoringUtils" $GITHUB_WORKSPACE
       - name: generate verilog file
         run:
-          python3 $GITHUB_WORKSPACE/scripts/xiangshan.py --generate --single-core
+          python3 $GITHUB_WORKSPACE/scripts/xiangshan.py --generate
       - name: build MinimalConfig emu
         run: |
           python3 $GITHUB_WORKSPACE/scripts/xiangshan.py --build \
